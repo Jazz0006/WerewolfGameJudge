@@ -1,5 +1,14 @@
 ## WerewolfGameJudge Agent Instructions
 
+## Evidence-first engineering policy (2026-10-15; current validation default)
+
+- Define independent observable acceptance, risk and ownership first. **Do not require new tests or a synthetic failing RED/GREEN phase for every change.** Early failing tests are an optional technique when they make implementation safer or faster, not a universal entry criterion.
+- Select the cheapest convincing evidence: existing tests, focused durable domain/integration tests, real browser/simulator/device workflows, inspected API/log evidence, type/build/static analysis, and exact diffs. Do not accept self-authored passing AI tests as sole proof of product correctness.
+- Add/retain automated regression tests for meaningful deterministic contracts and repeatable defects; avoid duplicate assertions and tests locked to incidental implementation shape. Retire obsolete tests only when the protected behavior is no longer needed or stronger coverage remains.
+- Use Playwright/browser, emulator or device flows for web/mobile UX and integration, but retain automated game rules, API authorization, persistence, privacy, payment, and concurrency regression coverage.
+- Maintain existing CI and release gates, core correctness, safety and independent acceptance. This policy overrides older prose implying that RED/GREEN must precede each source edit.
+
+
 ## Project Overview
 
 React Native (Expo SDK 56) multigame judge app. Cloudflare Worker + DO + D1 handles API/persistence/realtime. **Web-first**, compatible with iOS / Android / WeChat mini-program (web-view shell). Includes gacha collection + XP/level growth product modules (`packages/game-engine/src/product/`).
